@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('image_homes', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('category_id');
-            $table->string('nama');
-            $table->mediumText('deskripsi');
-            $table->mediumText('spesifikasi');
-            $table->mediumText('image')->nullable();
+            $table->mediumText('image_name');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('image_homes');
     }
 };

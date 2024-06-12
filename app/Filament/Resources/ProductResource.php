@@ -24,10 +24,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
     protected static ?string $navigationLabel = 'Item Product';
     protected static ?string $modelLabel = 'Item Product';
-    protected static ?string $navigationGroup = 'Item Management';
+    protected static ?string $navigationGroup = 'Content Management';
 
     public static function form(Form $form): Form
     {
@@ -89,7 +89,7 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('nama')->sortable()->searchable(),
                 TextColumn::make('category.nama')->label('Kategori'),
-                TextColumn::make('deskripsi'),
+                // TextColumn::make('deskripsi'),
                 // TextColumn::make('spesifikasi'),
                 ImageColumn::make('image')
             ])
