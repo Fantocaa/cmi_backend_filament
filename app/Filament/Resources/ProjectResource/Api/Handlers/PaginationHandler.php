@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Filament\Resources\ProductResource\Api\Handlers;
+namespace App\Filament\Resources\ProjectResource\Api\Handlers;
 
 use Illuminate\Http\Request;
 use Rupadana\ApiService\Http\Handlers;
 use Spatie\QueryBuilder\QueryBuilder;
-use App\Filament\Resources\ProductResource;
+use App\Filament\Resources\ProjectResource;
 
 class PaginationHandler extends Handlers
 {
     public static bool $public = true;
     public static string | null $uri = '/';
-    public static string | null $resource = ProductResource::class;
+    public static string | null $resource = ProjectResource::class;
+
 
     public function handler()
     {
@@ -31,22 +32,19 @@ class PaginationHandler extends Handlers
         // Get the base URL from the configuration
         $baseUrl = config('app.url') . '/storage/';
 
-        // Transform the collection to only include the required fields
+        // // Transform the collection to only include the required fields
         $result = $query->getCollection()->transform(function ($item) use ($baseUrl) {
             return [
                 'id' => $item->id,
-                'nama' => $item->nama,
-                'deskripsi' => $item->deskripsi,
-                'spesifikasi' => $item->spesifikasi,
-                'image' => array_map(function ($img) use ($baseUrl) {
-                    return $baseUrl . $img;
-                }, $item->image),
-                'category_id' => $item->category->id,
-                'category_name' => $item->category->nama,
+                // 'image_name' => $item->image_name
+                'image_name' => is_array($item->image_name)
+                    ? array_map(function ($img) use ($baseUrl) {
+                        return $baseUrl . $img;
+                    }, $item->image_name)
+                    : [],
             ];
         });
 
-        // Return the paginated result with the transformed collection
         return response()->json([
             'data' => $result,
         ]);
