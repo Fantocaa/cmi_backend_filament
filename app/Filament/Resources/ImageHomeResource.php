@@ -28,7 +28,8 @@ class ImageHomeResource extends Resource
                 FileUpload::make('image_name')
                     ->multiple()
                     ->maxFiles(9)
-                    ->label('Upload Foto (Maksimal 9 foto)'),
+                    ->label('Upload Foto (Maksimal 9 foto)')
+                    ->disk('public'),
             ]);
     }
 

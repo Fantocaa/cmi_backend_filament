@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ProjectResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProjectResource\RelationManagers;
+use Illuminate\Support\Facades\Storage;
+use Filament\Actions\DeleteAction;
 
 class ProjectResource extends Resource
 {
@@ -30,7 +32,8 @@ class ProjectResource extends Resource
                 FileUpload::make('image_name')
                     ->multiple()
                     ->maxFiles(9)
-                    ->label('Upload Foto (Maksimal 9 foto)'),
+                    ->label('Upload Foto (Maksimal 9 foto)')
+                    ->disk('public')
             ]);
     }
 
@@ -45,6 +48,7 @@ class ProjectResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
