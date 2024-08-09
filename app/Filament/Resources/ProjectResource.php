@@ -31,8 +31,8 @@ class ProjectResource extends Resource
             ->schema([
                 FileUpload::make('image_name')
                     ->multiple()
-                    ->maxFiles(9)
-                    ->label('Upload Foto (Maksimal 9 foto)')
+                    // ->maxFiles(5)
+                    ->label('Upload Foto (Maksimal 5 foto)')
                     ->disk('public')
             ]);
     }
