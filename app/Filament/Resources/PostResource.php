@@ -22,7 +22,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
-
+    // protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static ?string $navigationLabel = 'Post';
+    protected static ?string $modelLabel = 'Post';
+    protected static ?string $navigationGroup = 'Content Management';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
