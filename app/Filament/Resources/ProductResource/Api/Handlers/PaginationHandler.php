@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Rupadana\ApiService\Http\Handlers;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Filament\Resources\ProductResource;
+use Hashids\Hashids;
 
 class PaginationHandler extends Handlers
 {
@@ -30,11 +31,13 @@ class PaginationHandler extends Handlers
 
         // Get the base URL from the configuration
         $baseUrl = config('app.url') . '/storage/';
+        $hashids = new Hashids('', 24);  // 10 adalah panjang minimal
 
         // Transform the collection to only include the required fields
-        $result = $query->getCollection()->transform(function ($item) use ($baseUrl) {
+        $result = $query->getCollection()->transform(function ($item) use ($baseUrl, $hashids) {
             return [
-                'id' => $item->id,
+                // 'id' => $item->id,
+                'id' => $hashids->encode($item->id),
                 'nama' => $item->nama,
                 'deskripsi' => $item->deskripsi,
                 'spesifikasi' => $item->spesifikasi,
