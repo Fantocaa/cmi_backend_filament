@@ -19,7 +19,8 @@ class PostController extends Controller
             ->map(function ($post) {
                 $post->created_at = Carbon::parse($post->created_at)->format('d F Y');
                 $post->updated_at = Carbon::parse($post->updated_at)->format('d F Y');
-                $post->image_name = Storage::url($post->image_name);
+                // $post->image_name = Storage::url($post->image_name);
+                $post->image_name = config('app.url') . Storage::url($post->image_name);
                 return $post;
             });
 
